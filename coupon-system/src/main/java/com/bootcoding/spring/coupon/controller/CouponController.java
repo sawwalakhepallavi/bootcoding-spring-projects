@@ -1,15 +1,15 @@
 package com.bootcoding.spring.coupon.controller;
 
-import com.bootcoding.spring.coupon.Coupon;
+import com.bootcoding.spring.coupon.model.Coupon;
 import com.bootcoding.spring.coupon.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
-@RequestMapping("/coupon/")
+@RequestMapping("/coupon/") // Global Mapping
 public class CouponController {
     @Autowired
     private CouponService couponService;
@@ -22,11 +22,23 @@ public class CouponController {
     }
 
     // 2. Get Coupon Details by Coupon Id using PathVariable
+//    @GetMapping("coupon-id/{id}")
+//    public String getCouponById(@PathVariable("id") String couponId){
+//        return couponId + "-" + couponService.newCoupon();
+//    }
+
+    // 2.2 Get Coupon Details by Coupon Id using PathVariable
     @GetMapping("coupon-id/{id}")
-    public String getCouponById(@PathVariable("id") String couponId){
-        return couponId + "-" + couponService.newCoupon();
+    public Coupon getCouponObjectById(@PathVariable("id") String couponId){
+        Coupon coupon = couponService.generateNewCoupon();
+        return coupon;
     }
 
+    @GetMapping("generate/new")
+    public Coupon generateNewCoupon(){
+        Coupon coupon = couponService.generateNewCoupon();
+        return coupon;
+    }
     // 3. Get Coupons with Filter (Query Parameter)
     @GetMapping("search_coupon")
     public String searchCoupon(

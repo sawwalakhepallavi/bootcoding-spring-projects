@@ -16,6 +16,7 @@ public class CouponSystemApplication implements ApplicationRunner {
 
 	@Autowired
 	private CouponService couponService;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		String s = couponService.newCoupon();
