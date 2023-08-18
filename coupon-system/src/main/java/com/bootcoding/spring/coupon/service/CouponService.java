@@ -1,13 +1,11 @@
 package com.bootcoding.spring.coupon.service;
 
 import com.bootcoding.spring.coupon.model.Coupon;
+import com.bootcoding.spring.coupon.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class CouponService {
@@ -41,4 +39,32 @@ public class CouponService {
                 .build();
         return coupon;
     }
+
+    public boolean save(User user) {
+        users.add(user);
+        return true;
+    }
+
+    public boolean save(List<User> users) {
+        for(User u: users){
+            save(u);
+        }
+        return true;
+    }
+
+    private List<User> users = new ArrayList<>();
+
+    public User getUser(int id) {
+        for(User u: users){
+            if(id == u.getId()){
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+    // Search an element in array
 }
