@@ -16,25 +16,6 @@ public class CouponController {
     private CouponService couponService;
 
 
-    @PostMapping("register")
-    public String register(@RequestBody List<User> users){
-        boolean isSaved = couponService.save(users);
-        System.out.println("Body: " + users);
-        return "Success";
-    }
-
-
-    // 2.2 Get Coupon Details by Coupon Id using PathVariable
-    @GetMapping("user/{id}")
-    public User getUser(@PathVariable("id") int id){
-        User user = couponService.getUser(id);
-        return user;
-    }
-    @GetMapping("user")
-    public List<User> getAllUsers(){
-        List<User> users = couponService.getUsers();
-        return users;
-    }
 
     // 1. Get All Coupons
     @GetMapping("all-coupons")

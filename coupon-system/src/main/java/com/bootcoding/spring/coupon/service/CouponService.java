@@ -4,12 +4,14 @@ import com.bootcoding.spring.coupon.model.Coupon;
 import com.bootcoding.spring.coupon.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Component
+@Service
 public class CouponService {
 
+    // To Write Business Logic
     @Autowired
     private CouponHelper couponHelper;
 
