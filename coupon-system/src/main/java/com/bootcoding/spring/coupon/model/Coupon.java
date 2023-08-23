@@ -1,9 +1,6 @@
 package com.bootcoding.spring.coupon.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Generated;
@@ -16,8 +13,8 @@ import java.util.Date;
 @Table(name = "Coupon-application")
 public class Coupon {
     @Id
-    @Generated
-    private String id;
+    @GeneratedValue
+    private int id;
     private String title;
     private String description;
     private String couponCode;

@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/coupon/") // Global Mapping
+@RequestMapping("/coupon") // Global Mapping
 public class CouponController {
     @Autowired
     private CouponService couponService;
@@ -63,7 +63,7 @@ public class CouponController {
     public Coupon getDummyJson(){
         System.out.println("/getJson invoked");
         return Coupon.builder()
-                .id(couponService.newCoupon())
+//                .id(couponService.newCoupon())
                 .type("Voucher")
                 .validFor(3).build();
     }
@@ -75,4 +75,11 @@ public class CouponController {
         return couponService.getNewCoupon(quantity);
     }
     // http://localhost:8082/app-name/coupon/getCoupon
+
+    @PostMapping("/insertCoupon")
+    public String insertCoupon(){
+        int size= 10;
+        couponService.insertCoupons(size);
+        return "successful";
+    }
 }

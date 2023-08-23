@@ -2,11 +2,18 @@ package com.bootcoding.spring.coupon.service;
 
 import com.bootcoding.spring.coupon.model.Coupon;
 import com.bootcoding.spring.coupon.model.User;
+import com.bootcoding.spring.coupon.repository.CouponRepository;
+import com.bootcoding.spring.coupon.repository.UserRepository;
+import com.bootcoding.spring.coupon.util.CouponCodeGenerator;
+import com.bootcoding.spring.coupon.util.DescriptionGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static com.bootcoding.spring.coupon.util.CouponCodeGenerator.randomCouponCode;
+import static com.bootcoding.spring.coupon.util.DescriptionGenerator.description;
 
 @Service
 public class CouponService {
@@ -14,6 +21,21 @@ public class CouponService {
     // To Write Business Logic
     @Autowired
     private CouponHelper couponHelper;
+    @Autowired
+    public UserRepository userRepository;
+
+    @Autowired
+    public CouponRepository couponRepository;
+
+    public List<Coupon> insertCoupons(int size){
+        ArrayList<Coupon> coupons=new ArrayList<>();
+        for(int i=0;i<size;i++){
+
+            coupons.add(Coupon.builder().description(DescriptionGenerator.description()).couponCode(CouponCodeGenerator.randomCouponCode()).build());
+        }
+        return couponRepository.saveAll(coupons);
+    }
+
 
     public CouponService(CouponHelper couponHelper){
         this.couponHelper = couponHelper;
@@ -35,7 +57,7 @@ public class CouponService {
 
     public Coupon generateNewCoupon() {
         Coupon coupon = Coupon.builder()
-                .id(UUID.randomUUID().toString())
+//                .id(UUID.randomUUID().toString())
                 .validFor(5 + new Random().nextInt(90))
                 .type("COUPON")
                 .build();
