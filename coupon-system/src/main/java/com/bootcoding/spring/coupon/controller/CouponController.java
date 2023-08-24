@@ -65,7 +65,8 @@ public class CouponController {
         return Coupon.builder()
 //                .id(couponService.newCoupon())
                 .type("Voucher")
-                .validFor(3).build();
+//                .validFor(3)
+                .build();
     }
 
     @GetMapping("getMultipleCoupons")
@@ -76,9 +77,9 @@ public class CouponController {
     }
     // http://localhost:8082/app-name/coupon/getCoupon
 
-    @PostMapping("/insertCoupon")
-    public String insertCoupon(){
-        int size= 10;
+    @PostMapping("/insertCoupon/{size}")
+    public String insertCoupon(@PathVariable int size){
+//        int size= 10;
         couponService.insertCoupons(size);
         return "successful";
     }

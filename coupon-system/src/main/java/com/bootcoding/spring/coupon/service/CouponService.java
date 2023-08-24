@@ -4,8 +4,7 @@ import com.bootcoding.spring.coupon.model.Coupon;
 import com.bootcoding.spring.coupon.model.User;
 import com.bootcoding.spring.coupon.repository.CouponRepository;
 import com.bootcoding.spring.coupon.repository.UserRepository;
-import com.bootcoding.spring.coupon.util.CouponCodeGenerator;
-import com.bootcoding.spring.coupon.util.DescriptionGenerator;
+import com.bootcoding.spring.coupon.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,20 @@ public class CouponService {
         ArrayList<Coupon> coupons=new ArrayList<>();
         for(int i=0;i<size;i++){
 
-            coupons.add(Coupon.builder().description(DescriptionGenerator.description()).couponCode(CouponCodeGenerator.randomCouponCode()).build());
+            Coupon cpn=Coupon.builder()
+                            .title(TitleGenerator.randomTitle())
+                    .description(DescriptionGenerator.description())
+                    .couponCode(CouponCodeGenerator.randomCouponCode())
+                            .validDate(ValidDateGenerator.randomDate())
+                            .discount(DiscountGenerator.discount())
+                            .category(CategoryGenerator.randomCategory())
+                            .createdDate(CreateDateGenerator.createDate())
+                            .createdBy(CreatedBy.randomCreator())
+                            .active(IsActive.isActive())
+                            .status(CouponStatusGenerator.randomStatus())
+                    .type(TypeGenerator.type())
+                    .build();
+            coupons.add(cpn);
         }
         return couponRepository.saveAll(coupons);
     }
@@ -58,7 +70,7 @@ public class CouponService {
     public Coupon generateNewCoupon() {
         Coupon coupon = Coupon.builder()
 //                .id(UUID.randomUUID().toString())
-                .validFor(5 + new Random().nextInt(90))
+//                .validFor(5 + new Random().nextInt(90))
                 .type("COUPON")
                 .build();
         return coupon;

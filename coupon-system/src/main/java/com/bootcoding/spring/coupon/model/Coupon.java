@@ -18,17 +18,17 @@ public class Coupon {
     private String title;
     private String description;
     private String couponCode;
-    @Column(name = "Valid_date")
+    @Column(name = "valid_date")
     private Date validDate;
-    private int discount;
+    private double discount;
     private String category;
-    @Column(name = "Created_date")
+    @Column(name = "created_date")
     private Date createdDate;
     private String createdBy;
     private Boolean active;
     private String status;
     private String type;
-    private int validFor;
+//    private int validFor;
 
 
 }
